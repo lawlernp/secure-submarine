@@ -27,3 +27,41 @@ INSERT INTO "secret" ("content", "secrecy_level")
 VALUES ('Admirals Only: Captain Borodin is totally weird.', 13),
 ('Captains Or Above: Lieutenant Ryan is looking fly.', 6),
 ('Lieutenants Or Above: We are heading to the Bahamas.', 3);
+
+
+import React from "react";
+import { connect } from "react-redux";
+import mapStoreToProps from "../../redux/mapStoreToProps";
+import BarcodeScannerComponent from "react-webcam-barcode-scanner";
+import { render } from "react-dom";
+
+class Barcode extends React.Component {
+
+    state = {
+        data : 'Not Found',
+    }
+ getBook = () => {
+                  this.props.dispatch({
+                    type: "GET_BOOK",
+                    payload: this.state.data,
+                  });
+
+
+  };
+render() {
+  return (
+    <>
+      <BarcodeScannerComponent
+        width={500}
+        height={500}
+        onUpdate={(err, result) => {
+          if (result) {this.setState({
+              data : result})};
+        }}
+      />
+      <p>{this.state.data}</p>
+    </>
+  )};
+}
+
+export default connect(mapStoreToProps)(Barcode);

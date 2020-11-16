@@ -24,8 +24,22 @@ function* fetchUser() {
   }
 }
 
+function* bookSaga(isbn) {
+  console.log('hello from book saga', isbn.payload);
+  try {
+    const response = yield axios.get(`https://openlibrary.org/api/books?bibkeys=ISBN:${isbn.payload}&format=json&jscmd=data`);
+    console.log(response);
+    
+  } catch (error) {
+    console.log('API get failed', error);
+  }
+
+
+}
+
 function* userSaga() {
   yield takeLatest('FETCH_USER', fetchUser);
+  yield takeLatest('GET_BOOK', bookSaga);
 }
 
 export default userSaga;

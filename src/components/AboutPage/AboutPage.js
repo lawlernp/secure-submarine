@@ -1,4 +1,6 @@
 import React from 'react';
+// import Webcam from "../Webcam/Webcam";
+import Barcode from "../Barcode/Barcode";
 
 // This is one of our simplest components
 // It doesn't have local state, so it can be a function component.
@@ -8,6 +10,8 @@ import React from 'react';
 const AboutPage = () => (
   <div className="container">
     <div>
+      {/* <Webcam/> */}
+      <Barcode/>
       <p>This about page is for anyone to read!</p>
     </div>
   </div>
